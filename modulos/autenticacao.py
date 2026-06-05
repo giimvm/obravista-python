@@ -5,5 +5,8 @@ def carregar_usuarios():
         return json.load(arquivo)
 
 
-def fazer_login():
+def autenticar_usuario(email, senha):
     usuarios = carregar_usuarios()
+    
+def cadastrar_usuario(nome, email, senha):
+    print()
