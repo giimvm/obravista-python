@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [
     {
         "id": 1,
@@ -21,28 +20,4 @@
         "senha": "cidadao123",
         "tipo": "cidadao"
     }
-=======
-[
-    {
-        "id": 1,
-        "nome": "Carlos Silva",
-        "email": "carlos@prefeitura",
-        "senha": "gestor123",
-        "tipo": "gestor"
-    },
-    {
-        "id": 3,
-        "nome": "Construtora Alpha",
-        "email": "contato@empresa",
-        "senha": "empresa123",
-        "tipo": "empresa"
-    },
-    {
-        "id": 5,
-        "nome": "João Pereira",
-        "email": "joao@cidadao",
-        "senha": "cidadao123",
-        "tipo": "cidadao"
-    }
->>>>>>> origin/giovana
 ]

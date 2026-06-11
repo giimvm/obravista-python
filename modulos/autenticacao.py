@@ -1,21 +1,14 @@
 import json
 
+#carrega o json
 def carregar_usuarios():
     with open("dados/usuarios.json", "r", encoding="utf-8") as arquivo:
         return json.load(arquivo)
 
-
-def autenticar_usuario(email, senha):
-    usuarios = carregar_usuarios()
-    
-def cadastrar_usuario(nome, email, senha):
-    print()
-import json
-
-def carregar_usuarios():
-    with open("dados/usuarios.json", "r", encoding="utf-8") as arquivo:
-        return json.load(arquivo)
-
+#atualiza os dados do json
+def salvar_usuarios(usuarios):
+    with open("dados/usuarios.json", "w", encoding="utf-8") as arquivo:
+        json.dump(usuarios, arquivo, indent=4, ensure_ascii=False)
 
 def autenticar_usuario(email, senha):
     usuarios = carregar_usuarios()

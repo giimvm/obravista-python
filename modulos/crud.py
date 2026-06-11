@@ -1,21 +1,51 @@
-from autenticacao import autenticar_usuario, carregar_usuarios
-import json
+from autenticacao import *
 
-def autenticar_id_cidadao():
-  pass
-
-def atualizar_email():
-    pass
-
-def atualizar_senha():
-
-def atualizar_nome():
+def atualizar_email(id_usuario):
     usuarios = carregar_usuarios()
 
-    id_usuario = int(input("Digite seu ID: "))
+    for usuario in usuarios:
+        if usuario["id"] == id_usuario and usuario["tipo"] == "cidadao":
+
+            senha_atual = input(f"Digite sua senha atual: ")
+            
+            if senha_atual == usuario["senha"]:
+
+                nova_senha = input("Digite sua nova senha: ")
+
+                usuario["senha"] = nova_senha
+
+                salvar_usuarios(usuarios)
+
+            print("Email atualizado com sucesso!")
+            return
+
+    else:
+        print("Usuário não encontrado.") 
+
+def atualizar_senha(id_usuario):
+    usuarios = carregar_usuarios()
 
     for usuario in usuarios:
+        if usuario["id"] == id_usuario and usuario["tipo"] == "cidadao":
 
+            print(f"Email atual: {usuario['email']}")
+
+            novo_email = input("Digite seu novo email: ")
+
+            usuario["email"] = novo_email
+
+            salvar_usuarios(usuarios)
+
+            print("Senha atualizada com sucesso!")
+            return
+
+    else:
+        print("Usuário não encontrado.")
+
+def atualizar_nome(id_usuario):
+    usuarios = carregar_usuarios()
+
+    for usuario in usuarios:
         if usuario["id"] == id_usuario and usuario["tipo"] == "cidadao":
 
             print(f"Nome atual: {usuario['nome']}")
@@ -29,6 +59,27 @@ def atualizar_nome():
             print("Nome atualizado com sucesso!")
             return
 
-    print("Usuário não encontrado.")
+    else:
+        print("Usuário não encontrado.")
 
-def deletar_usuario():
+def deletar_usuario(id_usuario):
+    usuarios = carregar_usuarios()
+
+    for usuario in usuarios:
+        if usuario["id"] == id_usuario:
+            
+            email_usuario = input("Digite seu email: ")
+            senha_usuario = input("Digite sua senha: ")
+            
+            if email_usuario == usuario["email"] and senha_usuario == usuario["senha"]:
+                
+                usuarios.remove(usuario)
+
+                salvar_usuarios(usuarios)
+
+                print("Usuário removido com sucesso!")
+                return True
+
+    else:
+        print("Usuário não encontrado.")
+        return False
