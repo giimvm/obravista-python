@@ -1,8 +1,13 @@
 import json
+import uuid
 
 def carregar_usuarios():
     with open("dados/usuarios.json", "r", encoding="utf-8") as arquivo:
         return json.load(arquivo)
+    
+def salvar_usuarios(usuarios):
+    with open("dados/usuarios.json", "w", encoding="utf-8") as arquivo:
+        json.dump(usuarios, arquivo, indent=4, ensure_ascii=False)
 
 
 def autenticar_usuario(email, senha):
@@ -10,16 +15,15 @@ def autenticar_usuario(email, senha):
 
     for usuario in usuarios:
         if usuario["email"] == email and usuario["senha"] == senha:
-        return True
+            return True
 
-        else:
-        return False
+    return False
 
 def cadastrar_usuario(nome, email, senha, tipo):
         usuarios = carregar_usuarios()
 
         novo_usuario = {
-        "id": "id",
+        "id": str(uuid.uuid4()),
         "nome": nome,
         "email": email,
         "senha": senha,
@@ -29,7 +33,7 @@ def cadastrar_usuario(nome, email, senha, tipo):
         usuarios.append(novo_usuario)
 
         with open("dados/usuarios.json", "w", encoding="utf-8") as arquivo:
-        json.dump(usuarios, arquivo, indent=4, ensure_ascii=False)
+            json.dump(usuarios, arquivo, indent=4, ensure_ascii=False)
 
         return True
 
