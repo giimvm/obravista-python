@@ -2,6 +2,7 @@ import json
 from modulos.menu_crud import menu_crud
 import uuid
 from datetime import datetime
+from inicializacao.autenticacao import *
 
 #carrega todas as obras no arquivo obras.json
 def carregar_obras():
@@ -13,11 +14,7 @@ def obra_usuario(usuario_logado):
     obras = carregar_obras()
     for obra in obras:
         if obra["empresa_responsavel"] == usuario_logado["nome"]:
-            encontrou_obra = True
             return obra
-
-    if not encontrou_obra:
-        print("\nNenhuma obra encontrada para a sua empresa.")
 
 #exibe o card da obra da empresa logada
 def exibir_card_obra(usuario_logado):
@@ -25,7 +22,6 @@ def exibir_card_obra(usuario_logado):
     
     for obra in obras:
         if obra["empresa_responsavel"] == usuario_logado["nome"]:
-            encontrou_obra = True
             
             print("\n" + "=" * 50)
             print(f"{obra['nome']}")
@@ -34,13 +30,11 @@ def exibir_card_obra(usuario_logado):
             print(f"🚧 Status: {obra['status']}")
             print(f"📊 Progresso: {obra['progresso']}%")
             print("=" * 50)
-            
-
-    if not encontrou_obra:
-        print("\nNenhuma obra encontrada para a sua empresa.")
+        
 
 #apos a criação do relátorio, ele salva dentro do json relatorios.json     
 def salvar_relatorio(titulo, texto_relatorio, obra, usuario_logado):
+    
     caminho_arquivo = "dados/relatorios.json"
     
     with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
@@ -61,11 +55,12 @@ def salvar_relatorio(titulo, texto_relatorio, obra, usuario_logado):
     relatorios.append(novo_relatorio)
     with open(caminho_arquivo, "w", encoding="utf-8") as arquivo:
         json.dump(relatorios, arquivo, indent=4, ensure_ascii=False)
-        
+    limpar_tela()
     print("\n💾 Relatório salvo com sucesso!")
 
 #fazer envio do relatório    
 def enviar_relatorio(usuario_logado, obra):
+    
     print(f"\n📝 Criando relatório para a obra: {obra['nome']}")
     print("Descreva os avanços, insumos utilizados e intercorrências.")
     
@@ -95,7 +90,8 @@ def enviar_relatorio(usuario_logado, obra):
             if sub_escolha == 1:
                 salvar_relatorio(titulo, texto_relatorio, obra, usuario_logado)
                 loop = False
-            elif sub_escolha == 2:  
+            elif sub_escolha == 2: 
+                limpar_tela()
                 print("Voltando para o menu . . .")
                 menu_empresa(usuario_logado)
                 return
@@ -103,6 +99,7 @@ def enviar_relatorio(usuario_logado, obra):
 
     
 def menu_empresa(usuario_logado):
+    limpar_tela()
     obra = obra_usuario(usuario_logado)
     while True:
 
@@ -115,15 +112,19 @@ def menu_empresa(usuario_logado):
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
+            limpar_tela()
             exibir_card_obra(usuario_logado)
 
         elif opcao == "2":
+            limpar_tela()
             enviar_relatorio(usuario_logado, obra)
 
         elif opcao == "3":
+            limpar_tela()
             menu_crud(usuario_logado)
 
         elif opcao == "4":
+            limpar_tela()
             print("Saindo...")
             break
 

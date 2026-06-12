@@ -1,4 +1,8 @@
 import json
+import os
+
+def limpar_tela():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def carregar_usuarios():
     with open("dados/usuarios.json", "r", encoding="utf-8") as arquivo:

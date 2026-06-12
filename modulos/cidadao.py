@@ -1,5 +1,6 @@
 import json
 from modulos.menu_crud import menu_crud
+from inicializacao.autenticacao import *
 
 def carregar_obras():
     with open("dados/obras.json", "r", encoding="utf-8") as arquivo:
@@ -116,15 +117,19 @@ def menu_cidadao(usuario_logado):
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
+            limpar_tela()
             detalhes_da_obra()
 
         elif opcao == "2":
+            limpar_tela()
             pesquisar_obra()
 
         elif opcao == "3":
+            limpar_tela()
             menu_crud(usuario_logado)
 
         elif opcao == "4":
+            limpar_tela()
             print("Saindo...")
             break
 

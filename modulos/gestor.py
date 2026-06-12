@@ -1,6 +1,7 @@
 import json
 import uuid
 from modulos.menu_crud import menu_crud
+from inicializacao.autenticacao import *
 
 # --- FUNÇÕES AUXILIARES DE PERSISTÊNCIA ---
 def carregar_obras():
@@ -60,10 +61,7 @@ def dashboard_gestor():
     print("\n" + "=" * 60)
     print("DASHBOARD DE OBRAS - VISÃO DO GESTOR".center(60))
     print("=" * 60)
-    
-    for indice, obra in enumerate(obras, start=1):
-        exibir_card_gestor(indice, obra)
-        
+
     return obras
 
 # --- TELA 2: ADICIONAR NOVA OBRA (Formulário) ---
@@ -163,7 +161,7 @@ def atualizar_obra(obras):
 # --- TELA 4: RELATÓRIOS DA OBRA (Estatísticas e Gráficos de Texto) ---
 def relatorios_obra(obras):
     try:
-        escolha = int(input("\nDigite o número da obra para gerar o relatório (0 para voltar): ")).strip()
+        escolha = int(input("\nDigite o número da obra para gerar o relatório (0 para voltar): "))
         if escolha == 0:
             return
         obra = obras[escolha - 1]
@@ -210,20 +208,27 @@ def menu_gestor(usuario_logado):
         opcao = input("\nEscolha uma opção: ").strip()
 
         if opcao == "1":
+            limpar_tela()
             exibir_card_gestor(usuario_logado)
+  
         elif opcao == "2":
-            adicionar_obra()
+            limpar_tela()
+            adicionar_obra(usuario_logado)
         elif opcao == "3":
+            limpar_tela()
             obras_carregadas = dashboard_gestor()
             if obras_carregadas:
                 atualizar_obra(obras_carregadas)
         elif opcao == "4":
+            limpar_tela()
             obras_carregadas = dashboard_gestor()
             if obras_carregadas:
                 relatorios_obra(obras_carregadas)
         elif opcao == "5":
+            limpar_tela()
             menu_crud(usuario_logado)
         elif opcao == "0":
+            limpar_tela()
             print("Saindo do painel do gestor...")
             break
         else:

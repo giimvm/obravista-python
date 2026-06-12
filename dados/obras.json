@@ -20,7 +20,7 @@
         "categoria": "Lazer",
         "bairro": "Derby",
         "endereco": "Praça do Derby",
-        "status": "parada",
+        "status": "atrasada",
         "progresso": 40,
         "valor_previsto": 180000,
         "empresa_responsavel": "Obras Nordeste",
@@ -73,5 +73,20 @@
         "data_inicio": "2030-04-23",
         "previsao_entrega": "2030-04-24",
         "descricao": "oba oba ne"
+    },
+    {
+        "id": "5169a9fc-96e2-4c44-8bbe-4199badeb1d4",
+        "nome": "gigi obras lindas",
+        "categoria": "educação",
+        "bairro": "varzea",
+        "endereco": "afonso",
+        "status": "em andamento",
+        "progresso": 0,
+        "valor_previsto": 340000.0,
+        "empresa_responsavel": "A definir",
+        "gestor_responsavel": "leandro",
+        "data_inicio": "08-08-2006",
+        "previsao_entrega": "08-08-2026",
+        "descricao": "changes"
     }
 ]

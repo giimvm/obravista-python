@@ -2,6 +2,7 @@ from inicializacao.autenticacao import *
 from modulos.cidadao import *
 from modulos.empresa import *
 from modulos.gestor import *
+from inicializacao.autenticacao import *
 
 def login():
     email = input("Digite seu email: ")
