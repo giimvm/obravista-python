@@ -15,10 +15,10 @@ while True:
     if opcao == "1":
         usuario_logado = login()
 
-        if usuario_logado and tipo == cidadao:
+        if usuario_logado and tipo == "cidadao":
             menu_cidadao(usuario_logado)
 
-        elif usuario_logado and tipo == empresa:
+        elif usuario_logado and tipo == "empresa":
             menu_empresa(usuario_logado)
 
         

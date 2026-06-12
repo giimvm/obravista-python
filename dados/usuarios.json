@@ -4,8 +4,8 @@
         "nome": "Carlos Silva",
         "email": "carlos@prefeitura",
         "senha": "gestor123",
-        "tipo": "gestor"
-        "obras": ""
+        "tipo": "gestor",
+        "id_obras": "a1f8c2e4-7b11-4b4d-9c5e-111111111111"
     },
     {
         "id": 3,
@@ -34,5 +34,13 @@
         "email": "gigi@cidadao",
         "senha": "di4h5",
         "tipo": "cidadao"
+    }
+    {
+        "id": "568ff8s70-ff27-772d-962i-46527654",
+        "nome": "leandro",
+        "email": "leandro@prefeitura",
+        "senha": "leandro1234",
+        "tipo": "gestor",
+        "id_obra": ["b2f8c2e4-7b11-4b4d-9c5e-222222222222", "c3f8c2e4-7b11-4b4d-9c5e-333333333333","d4f8c2e4-7b11-4b4d-9c5e-444444444444", ]
     }
 ]
