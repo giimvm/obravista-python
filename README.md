@@ -1,48 +1,81 @@
-O ObraVista é uma aplicação  desenvolvida em Python para o gerenciamento do ciclo de vida de obras públicas. O projeto foi estruturado para consolidar conceitos fundamentais de lógica de programação e manipulação de dados em memória e em arquivos de texto.
+O ObraVista é uma aplicação de linha de comando desenvolvida em Python estruturada de forma modular. O sistema gerencia o ciclo de vida de obras públicas e perfis de utilizadores através de permissões baseadas no domínio do e-mail informado no login.
 
 
-O sistema implementa o ciclo completo de operações CRUD, manipulando os dados dinamicamente através de estruturas nativas do Python e garantindo a persistência através de I/O de arquivos.
-
-1. Create (Criação)
-Como funciona no código: Implementado na função adicionar_obra().
-
-Abordagem técnica: O sistema recebe os dados do utilizador via input(), gera um identificador único (id) incremental automático e estrutura essas informações num Dicionário Python. Este dicionário é então inserido (.append()) na Lista global de obras.
-
-2. Read (Leitura)
-Como funciona no código: Implementado nas funções listar_obras() e carregar_obras().
-
-Abordagem técnica: Leitura em disco: Ao iniciar, o sistema utiliza o modo "r" (read) para abrir o arquivo obravista_dados.txt, lê as strings linha a linha, faz o parsing (divisão por ;) e reconstrói os dicionários na memória.
-
-Exibição no terminal: A função realiza uma iteração (for) sobre a lista de obras, formatando e exibindo os dados (orçamento, progresso e status) de forma legível para o gestor.
-
-3. Update (Atualização)
-Como funciona no código: Implementado através da reescrita e atualização de estados de variáveis (ex: alteração de progresso de 0% a 100% ou mudança de status).
-
-Abordagem técnica: O sistema localiza o dicionário correspondente à obra através do seu id e altera diretamente o valor das chaves "status" ou "progresso".
-
-4. Delete (Remoção)
-Como funciona no código: Implementado no encerramento e na sincronização de dados.
-
-Abordagem técnica: Permite purgar ou filtrar elementos da lista principal antes que a nova matriz de dados seja gravada, garantindo que registos removidos ou obsoletos não persistam no arquivo final.
+ Estrutura do Repositório (Modularização)
+O projeto foi dividido em pacotes e módulos seguindo as boas práticas de separação de responsabilidades:
 
 
- Manipulação de Arquivos (Persistência)
-Para evitar a perda de dados ao encerrar o programa, implementou-se o armazenamento persistente em arquivo .txt:
+📁 obravista-python
+├── 📄 main.py                 # Ponto de entrada (Fluxo principal do sistema)
+├── 📁 dados/                  # Persistência de dados locais (Arquivos JSON)
+│   ├── 📄 obras.json          # Registo de obras públicas
+│   └── 📄 usuarios.json       # Registo de credenciais e perfis de utilizadores
+├── 📁 inicializacao/          # Módulos de autenticação e gestão de contas
+│   ├── 📄 autenticacao.py     # Lógica de validação de credenciais
+│   ├── 📄 cadastro.py         # Inserção de novos utilizadores
+│   ├── 📄 crud.py             # Funções de atualização e eliminação de contas
+│   └── 📄 login.py            # Captura de dados de acesso e tratamento de permissões
+└── 📁 modulos/                # Dashboards e menus interativos por perfil
+    ├── 📄 cidadao.py          # Painel de visualização e pesquisa para cidadãos
+    ├── 📄 empresa.py          # Painel da empreiteira
+    ├── 📄 gestor.py           # Painel da prefeitura (Gestor)
+    └── 📄 menu_crud.py        # Interface interativa de edição de perfil do utilizador
+ Mapeamento do CRUD no Sistema
+As operações essenciais de manipulação de dados estão distribuídas pelos seguintes módulos:
 
-Gerenciador de Contexto (with open): Utilizado para garantir que o arquivo seja aberto e fechado corretamente de forma automática, prevenindo bloqueios no sistema operativo ou corrupção de dados.
+Create (Criação): Executado em inicializacao/cadastro.py (cadastro de novos utilizadores) e no módulo do Gestor (adição de obras).
 
-Modos de Abertura: Uso do modo "r" para carregar os dados ao iniciar e do modo "w" (write) para sobrescrever o arquivo com as informações atualizadas no momento do salvamento.
+Read (Leitura): Executado em modulos/cidadao.py através das funções buscar_obras_ativas(), exibir_card_obra() e pesquisar_obra().
 
-Estruturas de Dados
-Tuplas (tuple): Utilizadas para definir constantes globais e imutáveis do sistema, como a lista de status permitidos: STATUS_VALIDOS = ("Em andamento", "Paralisada", "Concluída", "Atrasada"). Isso impede alterações acidentais nestas regras de negócio durante a execução.
+Update (Atualização): Executado em inicializacao/crud.py com as funções de mutação de estado (atualizar_nome(), atualizar_email() e atualizar_senha()).
 
-Dicionários (dict): Cada obra é representada como uma estrutura chave-valor, facilitando o acesso direto a propriedades específicas (obra["orcamento"], obra["progresso"]).
+Delete (Eliminação): Executado em inicializacao/crud.py através da função deletar_usuario().
 
-Listas (list): Funcionam como a matriz de dados em memória RAM (obras = []), agrupando todos os dicionários durante o tempo de execução do script.
+Aplicação dos Conceitos Obrigatórios da Disciplina
+Para fins de avaliação, segue a localização e a justificativa técnica do uso de cada conceito de lógica de programação exigido:
 
- Estruturas de Controlo e Repetição
-while True: Mantém o menu principal ativo em loop contínuo até que o utilizador selecione explicitamente a opção de saída (ativando o comando break).
+1. Funções (def)
+O projeto é totalmente procedural e modular. Cada funcionalidade possui um escopo isolado e reutilizável.
 
-if / elif / else: Atuam no roteamento do menu principal e na validação de dados de entrada, impedindo que o utilizador insira opções inválidas ou valores de progresso fora do intervalo de 0 a 100.
+Exemplo no código: def login(), def carregar_obras(), def pesquisar_obra().
 
-for: Utilizado para iterar sobre a lista de obras, tanto para a renderização do catálogo no ecrã quanto para a formatação de strings separadas por ponto e vírgula (;) no momento da gravação no arquivo de texto.
+2. Dicionários (dict)
+Utilizados para modelagem de entidades complexas estruturadas em par chave-valor.
+
+Exemplo no código: Cada registo dentro do arquivo obras.json é convertido num dicionário Python em tempo de execução para aceder diretamente a propriedades como obra["nome"], obra["bairro"] ou obra["progresso"].
+
+3. Listas (list)
+Utilizadas como matrizes de dados dinâmicas para armazenamento em memória RAM, permitindo filtragens, buscas e append de novos objetos.
+
+Exemplo no código: As variáveis de escopo local obras_ativas = [] e resultados = [] no arquivo modulos/cidadao.py.
+
+4. Tuplas (tuple)
+Utilizadas para definir coleções imutáveis que representam constantes e regras de negócio fixas do sistema (como tipos de status permitidos ou permissões de rotas), garantindo a integridade dos dados contra alterações acidentais.
+
+5. Estruturas Condicionais (if / elif / else)
+Aplicadas no encaminhamento de menus e no algoritmo de validação de permissões baseado em strings.
+
+Exemplo no código (inicializacao/login.py):
+
+Python
+tipo_usuario = email.split("@")[1]
+if tipo_usuario == "prefeitura":
+    # Direciona para o dashboard do gestor
+elif tipo_usuario == "cidadao":
+    # Direciona para o dashboard do cidadão
+6. Estruturas de Repetição (while / for)
+while True: Utilizado no arquivo main.py e em modulos/menu_crud.py para garantir que as interfaces de menus continuem em execução contínua até o acionamento de um evento de paragem (break).
+
+for: Utilizado para percorrer coleções de dados, como na renderização do catálogo ou na busca por correspondências de texto (for obra in obras:).
+
+7. Manipulação de Arquivos e Persistência (JSON)
+Substituição de ficheiros .txt simples pela biblioteca estruturada json para garantir persistência robusta em formato de dicionários serializados.
+
+Exemplo no código (modulos/cidadao.py):
+
+Python
+with open("dados/obras.json", "r", encoding="utf-8") as arquivo:
+    return json.load(arquivo)
+O gerenciador de contexto with open assegura a abertura segura em modo de leitura ("r") e garante o fecho automático do descritor de arquivo.
+
+Desenvolvido pelo Squad 16.
