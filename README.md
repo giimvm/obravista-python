@@ -1,86 +1,293 @@
-O ObraVista é uma aplicação de linha de comando desenvolvida em Python estruturada de forma modular. O sistema gerencia o ciclo de vida de obras públicas e perfis de utilizadores através de permissões baseadas no domínio do e-mail informado no login.
+# 🏗️ ObraVista
 
+Sistema de gestão e acompanhamento de obras públicas desenvolvido em Python, utilizando arquitetura modular e persistência de dados em arquivos JSON.
 
- Estrutura do Repositório (Modularização)
-O projeto foi dividido em pacotes e módulos seguindo as boas práticas de separação de responsabilidades:
+O objetivo do projeto é permitir que diferentes perfis de utilizadores acompanhem, gerenciem e atualizem informações relacionadas às obras públicas do município, com controle de acesso baseado no domínio do e-mail utilizado no login.
 
-main.py: Ponto de entrada e fluxo principal do sistema.
+---
 
-dados/obras.json: Registo de dados das obras públicas.
+## 📋 Funcionalidades
 
-dados/usuarios.json: Registo de credenciais e perfis de utilizadores.
+### 👤 Cidadão
 
-inicializacao/autenticacao.py: Lógica de validação de credenciais.
+* Visualização de obras públicas ativas.
+* Pesquisa de obras por nome.
+* Filtragem de informações relevantes.
+* Consulta de detalhes das obras.
 
-inicializacao/cadastro.py: Inserção de novos utilizadores no sistema.
+### 🏢 Empresa
 
-inicializacao/crud.py: Funções de atualização e eliminação de contas de utilizador.
+* Acesso ao painel específico da empreiteira.
+* Consulta de informações relacionadas às obras sob sua responsabilidade.
 
-inicializacao/login.py: Captura de dados de acesso e encaminhamento por tipo de utilizador.
+### 🏛️ Gestor (Prefeitura)
 
-modulos/cidadao.py: Painel de visualização, filtragem e pesquisa de obras para cidadãos.
+* Cadastro de novas obras.
+* Atualização de informações das obras.
+* Gerenciamento geral do sistema.
 
-modulos/empresa.py: Painel específico para as empreiteiras.
+### 🔐 Gestão de Usuários
 
-modulos/gestor.py: Painel administrativo para a prefeitura.
+* Cadastro de novos utilizadores.
+* Autenticação por e-mail e senha.
+* Atualização de dados cadastrais.
+* Exclusão de contas.
 
-modulos/menu_crud.py: Interface interativa para a gestão do perfil do utilizador.
- Mapeamento do CRUD no Sistema
-As operações essenciais de manipulação de dados estão distribuídas pelos seguintes módulos:
+---
 
-Create (Criação): Executado em inicializacao/cadastro.py (cadastro de novos utilizadores) e no módulo do Gestor (adição de obras).
+# 🗂️ Estrutura do Projeto
 
-Read (Leitura): Executado em modulos/cidadao.py através das funções buscar_obras_ativas(), exibir_card_obra() e pesquisar_obra().
+```text
+ObraVista/
+│
+├── main.py
+│
+├── dados/
+│   ├── obras.json
+│   └── usuarios.json
+│   └── relatorios.json
+│
+├── inicializacao/
+│   ├── autenticacao.py
+│   ├── cadastro.py
+│   ├── crud.py
+│   └── login.py
+│
+└── modulos/
+    ├── cidadao.py
+    ├── empresa.py
+    ├── gestor.py
+    └── menu_crud.py
+```
 
-Update (Atualização): Executado em inicializacao/crud.py com as funções de mutação de estado (atualizar_nome(), atualizar_email() e atualizar_senha()).
+---
 
-Delete (Eliminação): Executado em inicializacao/crud.py através da função deletar_usuario().
+# 🏛️ Arquitetura Modular
 
-Aplicação dos Conceitos Obrigatórios da Disciplina
-Para fins de avaliação, segue a localização e a justificativa técnica do uso de cada conceito de lógica de programação exigido:
+O sistema foi desenvolvido seguindo princípios de modularização, separando cada responsabilidade em arquivos específicos.
 
-1. Funções (def)
-O projeto é totalmente procedural e modular. Cada funcionalidade possui um escopo isolado e reutilizável.
+| Arquivo           | Responsabilidade                 |
+| ----------------- | -------------------------------- |
+| `main.py`         | Fluxo principal da aplicação     |
+| `autenticacao.py` | Validação de credenciais         |
+| `cadastro.py`     | Cadastro de novos utilizadores   |
+| `crud.py`         | Atualização e exclusão de contas |
+| `login.py`        | Encaminhamento dos utilizadores  |
+| `cidadao.py`      | Funcionalidades do cidadão       |
+| `empresa.py`      | Funcionalidades da empresa       |
+| `gestor.py`       | Funcionalidades administrativas  |
+| `menu_crud.py`    | Interface de gestão de perfil    |
 
-Exemplo no código: def login(), def carregar_obras(), def pesquisar_obra().
+---
 
-2. Dicionários (dict)
-Utilizados para modelagem de entidades complexas estruturadas em par chave-valor.
+# 🔄 Implementação do CRUD
 
-Exemplo no código: Cada registo dentro do arquivo obras.json é convertido num dicionário Python em tempo de execução para aceder diretamente a propriedades como obra["nome"], obra["bairro"] ou obra["progresso"].
+## Create (Criar)
 
-3. Listas (list)
-Utilizadas como matrizes de dados dinâmicas para armazenamento em memória RAM, permitindo filtragens, buscas e append de novos objetos.
+Responsável pelo cadastro de novos dados no sistema.
 
-Exemplo no código: As variáveis de escopo local obras_ativas = [] e resultados = [] no arquivo modulos/cidadao.py.
+### Utilizado em:
 
-4. Tuplas (tuple)
-Utilizadas para definir coleções imutáveis que representam constantes e regras de negócio fixas do sistema (como tipos de status permitidos ou permissões de rotas), garantindo a integridade dos dados contra alterações acidentais.
+* Cadastro de utilizadores
+* Cadastro de obras públicas
 
-5. Estruturas Condicionais (if / elif / else)
-Aplicadas no encaminhamento de menus e no algoritmo de validação de permissões baseado em strings.
+**Arquivos:**
 
-Exemplo no código (inicializacao/login.py):
+* `inicializacao/cadastro.py`
+* `modulos/gestor.py`
 
-Python
+---
+
+## Read (Ler)
+
+Responsável pela consulta e visualização dos dados.
+
+### Utilizado em:
+
+* Busca de obras
+* Pesquisa de obras
+* Exibição de informações
+
+**Arquivos:**
+
+* `modulos/cidadao.py`
+
+**Funções principais:**
+
+* `buscar_obras_ativas()`
+* `exibir_card_obra()`
+* `pesquisar_obra()`
+
+---
+
+## Update (Atualizar)
+
+Responsável pela alteração de informações já existentes.
+
+### Arquivo:
+
+* `inicializacao/crud.py`
+
+**Funções:**
+
+* `atualizar_nome()`
+* `atualizar_email()`
+* `atualizar_senha()`
+
+---
+
+## Delete (Excluir)
+
+Responsável pela remoção de dados.
+
+### Arquivo:
+
+* `inicializacao/crud.py`
+
+**Função:**
+
+* `deletar_usuario()`
+
+---
+
+# 📚 Conceitos da Disciplina Aplicados
+
+## 1️⃣ Funções
+
+O projeto utiliza funções para encapsular responsabilidades específicas e promover reutilização de código.
+
+### Exemplos
+
+```python
+def login():
+    pass
+
+def pesquisar_obra():
+    pass
+```
+
+---
+
+## 2️⃣ Dicionários
+
+Utilizados para representar entidades complexas do sistema.
+
+### Exemplo
+
+```python
+obra["nome"]
+obra["bairro"]
+obra["progresso"]
+```
+
+Cada registro carregado dos arquivos JSON é convertido automaticamente para um dicionário Python.
+
+---
+
+## 3️⃣ Listas
+
+Utilizadas para armazenamento e manipulação dinâmica de coleções de dados.
+
+### Exemplos
+
+```python
+obras_ativas = []
+resultados = []
+```
+
+Permitem buscas, filtragens e inserções de novos registros.
+
+---
+
+## 4️⃣ Tuplas
+
+Utilizadas para armazenar conjuntos imutáveis de valores, como constantes e regras de negócio.
+
+### Exemplo
+
+```python
+STATUS_PERMITIDOS = (
+    "Planejamento",
+    "Em andamento",
+    "Concluída"
+)
+```
+
+---
+
+## 5️⃣ Estruturas Condicionais
+
+Responsáveis pela validação de permissões e fluxo de navegação.
+
+### Exemplo
+
+```python
 tipo_usuario = email.split("@")[1]
+
 if tipo_usuario == "prefeitura":
-    # Direciona para o dashboard do gestor
+    gestor()
 elif tipo_usuario == "cidadao":
-    # Direciona para o dashboard do cidadão
-6. Estruturas de Repetição (while / for)
-while True: Utilizado no arquivo main.py e em modulos/menu_crud.py para garantir que as interfaces de menus continuem em execução contínua até o acionamento de um evento de paragem (break).
+    cidadao()
+```
 
-for: Utilizado para percorrer coleções de dados, como na renderização do catálogo ou na busca por correspondências de texto (for obra in obras:).
+---
 
-7. Manipulação de Arquivos e Persistência (JSON)
-Substituição de ficheiros .txt simples pela biblioteca estruturada json para garantir persistência robusta em formato de dicionários serializados.
+## 6️⃣ Estruturas de Repetição
 
-Exemplo no código (modulos/cidadao.py):
+### While
 
-Python
+Utilizado para manter os menus ativos até que o utilizador escolha sair.
+
+```python
+while True:
+    menu()
+```
+
+### For
+
+Utilizado para percorrer listas de utilizadores e obras.
+
+```python
+for obra in obras:
+    print(obra["nome"])
+```
+
+---
+
+## 7️⃣ Manipulação de Arquivos JSON
+
+O sistema utiliza persistência de dados através de arquivos JSON.
+
+### Exemplo
+
+```python
 with open("dados/obras.json", "r", encoding="utf-8") as arquivo:
-    return json.load(arquivo)
-O gerenciador de contexto with open assegura a abertura segura em modo de leitura ("r") e garante o fecho automático do descritor de arquivo.
+    obras = json.load(arquivo)
+```
 
-Desenvolvido pelo Squad 16.
+O gerenciador de contexto `with` garante abertura e fechamento seguro dos arquivos.
+
+---
+
+# 🚀 Tecnologias Utilizadas
+
+* Python 3
+* JSON
+* Programação Modular
+* CRUD
+* Estruturas de Dados
+* Manipulação de Arquivos
+
+---
+
+# 👨‍💻 Equipe
+
+**Squad 16**
+
+Projeto desenvolvido para aplicação dos conceitos fundamentais de Lógica de Programação, Estruturas de Dados e Modularização em Python.
+
+---
+
+## 📄 Licença
+
+Projeto desenvolvido exclusivamente para fins acadêmicos.
