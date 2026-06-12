@@ -1,7 +1,7 @@
 from inicializacao.autenticacao import *
 from modulos.cidadao import *
 from modulos.empresa import *
-
+from modulos.gestor import *
 
 def login():
     email = input("Digite seu email: ")
@@ -13,7 +13,7 @@ def login():
     if usuario:
              
         if tipo_usuario == "prefeitura":
-            print("Abrir dashboard da prefeitura")
+            menu_gestor(usuario)
         
         elif tipo_usuario == "empresa":
             menu_empresa(usuario)

@@ -13,7 +13,7 @@ while True:
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
-        usuario_logado = login()
+        usuario_logado = login()     
 
     elif opcao == "2":
         nome = input("Digite seu nome: ")
