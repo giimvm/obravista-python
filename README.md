@@ -4,22 +4,27 @@ O ObraVista é uma aplicação de linha de comando desenvolvida em Python estrut
  Estrutura do Repositório (Modularização)
 O projeto foi dividido em pacotes e módulos seguindo as boas práticas de separação de responsabilidades:
 
+main.py: Ponto de entrada e fluxo principal do sistema.
 
-📁 obravista-python
-├── 📄 main.py                 # Ponto de entrada (Fluxo principal do sistema)
-├── 📁 dados/                  # Persistência de dados locais (Arquivos JSON)
-│   ├── 📄 obras.json          # Registo de obras públicas
-│   └── 📄 usuarios.json       # Registo de credenciais e perfis de utilizadores
-├── 📁 inicializacao/          # Módulos de autenticação e gestão de contas
-│   ├── 📄 autenticacao.py     # Lógica de validação de credenciais
-│   ├── 📄 cadastro.py         # Inserção de novos utilizadores
-│   ├── 📄 crud.py             # Funções de atualização e eliminação de contas
-│   └── 📄 login.py            # Captura de dados de acesso e tratamento de permissões
-└── 📁 modulos/                # Dashboards e menus interativos por perfil
-    ├── 📄 cidadao.py          # Painel de visualização e pesquisa para cidadãos
-    ├── 📄 empresa.py          # Painel da empreiteira
-    ├── 📄 gestor.py           # Painel da prefeitura (Gestor)
-    └── 📄 menu_crud.py        # Interface interativa de edição de perfil do utilizador
+dados/obras.json: Registo de dados das obras públicas.
+
+dados/usuarios.json: Registo de credenciais e perfis de utilizadores.
+
+inicializacao/autenticacao.py: Lógica de validação de credenciais.
+
+inicializacao/cadastro.py: Inserção de novos utilizadores no sistema.
+
+inicializacao/crud.py: Funções de atualização e eliminação de contas de utilizador.
+
+inicializacao/login.py: Captura de dados de acesso e encaminhamento por tipo de utilizador.
+
+modulos/cidadao.py: Painel de visualização, filtragem e pesquisa de obras para cidadãos.
+
+modulos/empresa.py: Painel específico para as empreiteiras.
+
+modulos/gestor.py: Painel administrativo para a prefeitura.
+
+modulos/menu_crud.py: Interface interativa para a gestão do perfil do utilizador.
  Mapeamento do CRUD no Sistema
 As operações essenciais de manipulação de dados estão distribuídas pelos seguintes módulos:
 
