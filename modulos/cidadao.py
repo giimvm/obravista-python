@@ -1,5 +1,5 @@
 import json
-from autenticacao import *
+from modulos.menu_crud import menu_crud
 
 def carregar_obras():
     with open("dados/obras.json", "r", encoding="utf-8") as arquivo:
@@ -102,12 +102,10 @@ def pesquisar_obra():
         exibir_card_obra(indice, obra)
 
 
-
-
 def menu_cidadao(usuario_logado):
-    while True:
+    dashboard_obras(usuario_logado)
 
-        dashboard_obras(usuario_logado)
+    while True:
 
         print("\nAÇÕES")
         print("1 - Ver detalhes de uma obra")
@@ -124,7 +122,7 @@ def menu_cidadao(usuario_logado):
             pesquisar_obra()
 
         elif opcao == "3":
-            print("Abrir CRUD do cidadão")
+            menu_crud(usuario_logado)
 
         elif opcao == "4":
             print("Saindo...")
@@ -132,5 +130,3 @@ def menu_cidadao(usuario_logado):
 
         else:
             print("Opção inválida.")
-
-print(menu_cidadao())

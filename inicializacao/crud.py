@@ -1,4 +1,4 @@
-from autenticacao import carregar_usuarios, salvar_usuarios
+from inicializacao.autenticacao import carregar_usuarios, salvar_usuarios
 
 
 def buscar_usuario_logado(usuario_logado, usuarios):
@@ -44,13 +44,28 @@ def atualizar_email(usuario_logado):
         print("Usuário não encontrado.")
         return
 
+    dominios_validos = ["cidadao", "empresa", "prefeitura"]
+
     print(f"Email atual: {usuario['email']}")
     novo_email = input("Digite o novo email: ")
 
+    if "@" not in novo_email:
+        print("Email inválido!")
+        return
+
+    novo_tipo = novo_email.split("@")[1]
+
+    if novo_tipo not in dominios_validos:
+        print("Tipo de usuário inválido!")
+        return
+
     usuario["email"] = novo_email
+    usuario["tipo"] = novo_tipo
+
     salvar_usuarios(usuarios)
 
     usuario_logado["email"] = novo_email
+    usuario_logado["tipo"] = novo_tipo
 
     print("Email atualizado com sucesso!")
 
