@@ -54,5 +54,19 @@
         "data_inicio": "2025-11-01",
         "previsao_entrega": "2026-05-01",
         "descricao": "Ampliação do atendimento e novas salas médicas."
+    },
+    {
+        "id": "39a4200f-9fca-4647-b8df-34a9dc8999da",
+        "nome": "oba oba",
+        "categoria": "educação",
+        "bairro": "prazeres",
+        "endereco": "rua tilambuco, 666",
+        "status": "em andamento",
+        "progresso": 0,
+        "valor_previsto": 1.5,
+        "empresa_responsavel": "A definir",
+        "data_inicio": "2030-04-23",
+        "previsao_entrega": "2030-04-24",
+        "descricao": "oba oba ne"
     }
 ]

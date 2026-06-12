@@ -13,15 +13,7 @@ while True:
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
-        usuario_logado = login()
-
-        if usuario_logado and tipo == cidadao:
-            menu_cidadao(usuario_logado)
-
-        elif usuario_logado and tipo == empresa:
-            menu_empresa(usuario_logado)
-
-        
+        usuario_logado = login()     
 
     elif opcao == "2":
         nome = input("Digite seu nome: ")
