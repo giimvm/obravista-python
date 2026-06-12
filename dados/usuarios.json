@@ -15,9 +15,37 @@
     },
     {
         "id": 5,
-        "nome": "João Pereira",
-        "email": "joao@cidadao",
-        "senha": "cidadao123",
+        "nome": "giovana",
+        "email": "giovana@cidadao",
+        "senha": "1234giovana",
+        "tipo": "cidadao"
+    },
+    {
+        "id": 6,
+        "nome": "Obras Nordeste",
+        "email": "obras_nordeste@empresa",
+        "senha": "empresa124",
+        "tipo": "empresa"
+    },
+    {
+        "id": "568fd2f0-bb27-412d-962e-475813784b29",
+        "nome": "gigi",
+        "email": "gigi@cidadao",
+        "senha": "di4h5",
+        "tipo": "cidadao"
+    },
+    {
+        "id": "568ff8s70-ff27-772d-962i-46527654",
+        "nome": "leandro",
+        "email": "leandro@prefeitura",
+        "senha": "leandro1234",
+        "tipo": "gestor"
+    },
+    {
+        "id": "ee1a4f91-4ed6-4794-a231-41b2b3a23878",
+        "nome": "luan",
+        "email": "luan@cidadao",
+        "senha": "luan1234",
         "tipo": "cidadao"
     }
 ]
