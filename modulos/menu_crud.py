@@ -1,4 +1,5 @@
 from inicializacao.crud import *
+from inicializacao.autenticacao import *
 
 def menu_crud(usuario_logado):
     while True:
@@ -13,18 +14,23 @@ def menu_crud(usuario_logado):
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
+            limpar_tela()
             listar_dados_usuario(usuario_logado)
 
         elif opcao == "2":
+            limpar_tela()
             atualizar_nome(usuario_logado)
 
         elif opcao == "3":
+            limpar_tela()
             atualizar_email(usuario_logado)
 
         elif opcao == "4":
+            limpar_tela()
             atualizar_senha(usuario_logado)
 
         elif opcao == "5":
+            limpar_tela()
             conta_excluida = deletar_usuario(usuario_logado)
 
             if conta_excluida:

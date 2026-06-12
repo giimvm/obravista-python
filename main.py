@@ -2,6 +2,7 @@ from inicializacao.cadastro import cadastro
 from inicializacao.login import login
 from modulos.cidadao import menu_cidadao
 from modulos.empresa import menu_empresa
+from inicializacao.autenticacao import *
 
 
 while True:
@@ -13,6 +14,7 @@ while True:
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
+        limpar_tela()
         usuario_logado = login()     
 
     elif opcao == "2":
@@ -20,9 +22,11 @@ while True:
         email = input("Digite seu email: ")
         senha = input("Digite sua senha: ")
         if cadastro(nome, email, senha):
+            limpar_tela()
             print("Usuário cadastrado com sucesso!")
 
     elif opcao == "0":
+        limpar_tela()
         print("Encerrando sistema...")
         break
 

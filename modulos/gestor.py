@@ -1,6 +1,7 @@
 import json
 import uuid
 from modulos.menu_crud import menu_crud
+from inicializacao.autenticacao import *
 
 # --- FUNÇÕES AUXILIARES DE PERSISTÊNCIA ---
 def carregar_obras():
@@ -156,7 +157,6 @@ def relatorios_obra(obras):
     print("\n💰 SAÚDE FINANCEIRA:")
     print(f"Orçamento Liberado: R$ {obra['valor_previsto']:,.2f}")
     print("=" * 60)
-    print("Simulando geração de PDF... (Concluído)")
 
 # --- MENU PRINCIPAL DO GESTOR ---
 def menu_gestor(usuario_logado):
@@ -175,20 +175,26 @@ def menu_gestor(usuario_logado):
         opcao = input("\nEscolha uma opção: ")
 
         if opcao == "1":
+            limpar_tela()
             dashboard_gestor()
         elif opcao == "2":
+            limpar_tela()
             adicionar_obra()
         elif opcao == "3":
+            limpar_tela()
             obras_carregadas = dashboard_gestor()
             if obras_carregadas:
                 atualizar_obra(obras_carregadas)
         elif opcao == "4":
+            limpar_tela()
             obras_carregadas = dashboard_gestor()
             if obras_carregadas:
                 relatorios_obra(obras_carregadas)
         elif opcao == "5":
+            limpar_tela()
             menu_crud(usuario_logado)
         elif opcao == "0":
+            limpar_tela()
             print("Saindo do painel do gestor...")
             break
         else:
