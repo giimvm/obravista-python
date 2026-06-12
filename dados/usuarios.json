@@ -15,9 +15,23 @@
     },
     {
         "id": 5,
-        "nome": "João Pereira",
-        "email": "joao@cidadao",
-        "senha": "cidadao123",
+        "nome": "giovana",
+        "email": "giovana@cidadao",
+        "senha": "1234giovana",
+        "tipo": "cidadao"
+    },
+    {
+        "id": 6,
+        "nome": "Obras Nordeste",
+        "email": "obras_nordeste@empresa",
+        "senha": "empresa124",
+        "tipo": "empresa"
+    },
+    {
+        "id": "568fd2f0-bb27-412d-962e-475813784b29",
+        "nome": "gigi",
+        "email": "gigi@cidadao",
+        "senha": "di4h5",
         "tipo": "cidadao"
     }
 ]
