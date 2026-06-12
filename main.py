@@ -1,6 +1,7 @@
 from inicializacao.cadastro import cadastro
 from inicializacao.login import login
 from modulos.cidadao import menu_cidadao
+from modulos.empresa import menu_empresa
 
 
 while True:
@@ -14,8 +15,13 @@ while True:
     if opcao == "1":
         usuario_logado = login()
 
-        if usuario_logado:
+        if usuario_logado and tipo == cidadao:
             menu_cidadao(usuario_logado)
+
+        elif usuario_logado and tipo == empresa:
+            menu_empresa(usuario_logado)
+
+        
 
     elif opcao == "2":
         nome = input("Digite seu nome: ")
